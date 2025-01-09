@@ -41,8 +41,8 @@ class LoginButton extends StatelessWidget {
             : Text(
                 text,
                 style: TextStyle(
-                  fontSize: 26,
-                  fontWeight: FontWeight.bold,
+                  fontSize: 24,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
       ),

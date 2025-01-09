@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:homeegram/core/router/scaffold_with_nav.dart';
 import 'package:homeegram/features/auth/presentation/pages/home_page.dart';
 import 'package:homeegram/features/auth/presentation/pages/login_page.dart';
+import 'package:homeegram/features/auth/presentation/pages/otp_verification_page.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'root');
@@ -15,11 +16,13 @@ class AppRouter {
     initialLocation: '/',
     debugLogDiagnostics: true,
     redirect: (context, state) async {
-      // Example authentication check
       final isLoggedIn = false; // Replace with your auth check
       final isGoingToLogin = state.matchedLocation == '/login';
+      final isGoingToOtp =
+          state.matchedLocation == '/otp_verification'; // Add this
 
-      if (!isLoggedIn && !isGoingToLogin) {
+      // Allow both login and OTP verification pages when not logged in
+      if (!isLoggedIn && !isGoingToLogin && !isGoingToOtp) {
         return '/login';
       }
       if (isLoggedIn && isGoingToLogin) {
@@ -30,15 +33,18 @@ class AppRouter {
     routes: [
       // Auth Routes
       GoRoute(
-        path: '/login',
-        name: 'login',
-        builder: (context, state) => const LoginPage(),
+          path: '/login',
+          name: 'login',
+          builder: (context, state) => const LoginPage(),
+          routes: [
+          
+        ]
       ),
-      // GoRoute(
-      //   path: '/register',
-      //   name: 'register',
-      //   builder: (context, state) => const RegisterPage(),
-      // ),
+      GoRoute(
+        path: '/otp_verification',
+        name: 'otp_verification', // Fix the name
+        builder: (context, state) => const OtpVerificationPage(),
+      ),
 
       // Main App Shell
       ShellRoute(
@@ -53,54 +59,6 @@ class AppRouter {
             name: 'home',
             builder: (context, state) => const HomePage(),
           ),
-          // // Home Routes
-          // GoRoute(
-          //   path: '/',
-          //   name: 'home',
-          //   builder: (context, state) => const HomePage(),
-          //   routes: [
-          //     GoRoute(
-          //       path: 'post/:postId',
-          //       name: 'post-details',
-          //       builder: (context, state) {
-          //         final postId = state.pathParameters['postId']!;
-          //         return PostDetailsPage(postId: postId);
-          //       },
-          //     ),
-          //   ],
-          // ),
-
-          // // Profile Routes
-          // GoRoute(
-          //   path: '/profile',
-          //   name: 'profile',
-          //   builder: (context, state) => const ProfilePage(),
-          //   routes: [
-          //     GoRoute(
-          //       path: 'edit',
-          //       name: 'edit-profile',
-          //       parentNavigatorKey: _rootNavigatorKey, // Opens in full screen
-          //       builder: (context, state) => const EditProfilePage(),
-          //     ),
-          //   ],
-          // ),
-
-          // // Chat Routes
-          // GoRoute(
-          //   path: '/chat',
-          //   name: 'chat-list',
-          //   builder: (context, state) => const ChatListPage(),
-          //   routes: [
-          //     GoRoute(
-          //       path: ':chatId',
-          //       name: 'chat-details',
-          //       builder: (context, state) {
-          //         final chatId = state.pathParameters['chatId']!;
-          //         return ChatDetailsPage(chatId: chatId);
-          //       },
-          //     ),
-          //   ],
-          // ),
         ],
       ),
     ],

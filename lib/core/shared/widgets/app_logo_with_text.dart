@@ -19,7 +19,7 @@ class AppLogoWithText extends StatelessWidget {
       decoration: BoxDecoration(
           color: AppColors.lightSurface,
           borderRadius: BorderRadius.circular(50)),
-      padding: EdgeInsets.all(0),
+      padding: EdgeInsets.symmetric(horizontal: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
