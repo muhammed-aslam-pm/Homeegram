@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:homeegram/core/router/scaffold_with_nav.dart';
+import 'package:homeegram/features/auth/presentation/pages/home_page.dart';
 import 'package:homeegram/features/auth/presentation/pages/login_page.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey =
@@ -46,6 +47,12 @@ class AppRouter {
           return ScaffoldWithBottomNav(child: child);
         },
         routes: [
+          // Home Route
+          GoRoute(
+            path: '/',
+            name: 'home',
+            builder: (context, state) => const HomePage(),
+          ),
           // // Home Routes
           // GoRoute(
           //   path: '/',
