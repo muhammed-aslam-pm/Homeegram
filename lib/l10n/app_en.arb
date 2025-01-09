@@ -1,0 +1,70 @@
+{
+    "loginWelcome": "Welcome to Homeeera Family!",
+    "@loginWelcome": {
+        "description": "Login page first title"
+    },
+    "loginSubtitle": "Let's Build Dreams Together",
+    "@loginSubtitle": {
+        "description": "Subtitle under login welcome text"
+    },
+    "appName": "Homeegram",
+    "@appName": {
+        "description": "Application name displayed on all screens"
+    },
+    "mobileHint": "Mobile",
+    "@mobileHint": {
+        "description": "Placeholder text for the mobile number input field"
+    },
+    "getOtpButton": "Get OTP!",
+    "@getOtpButton": {
+        "description": "Button text for requesting OTP"
+    },
+    "orContinueWith": "Or continue with",
+    "@orContinueWith": {
+        "description": "Text for alternate login method"
+    },
+    "agreeTerms": "I agree Terms & condition and Privacy policy",
+    "@agreeTerms": {
+        "description": "Text for agreement to terms and conditions"
+    },
+    "otpVerification": "OTP Verification",
+    "@otpVerification": {
+        "description": "Title for OTP verification screen"
+    },
+    "otpInstruction": "Enter OTP Number share to",
+    "@otpInstruction": {
+        "description": "Instruction text for OTP input"
+    },
+    "didNotReceiveOtp": "Didn’t receive the OTP?",
+    "@didNotReceiveOtp": {
+        "description": "Prompt for OTP resend"
+    },
+    "resendOtp": "Resent OTP",
+    "@resendOtp": {
+        "description": "Button text for resending OTP"
+    },
+    "verifyAndProceedButton": "Verify & proceed",
+    "@verifyAndProceedButton": {
+        "description": "Button text for verifying OTP and proceeding"
+    },
+    "signUp": "Sign Up",
+    "@signUp": {
+        "description": "Title for the sign-up screen"
+    },
+    "profileName": "Profile Name",
+    "@profileName": {
+        "description": "Label for profile name input field"
+    },
+    "homeeId": "Homee Id",
+    "@homeeId": {
+        "description": "Label for Homee ID input field"
+    },
+    "homeeIdHint": "*Homee Id is a unique user name created by yourself for your profile!",
+    "@homeeIdHint": {
+        "description": "Hint text explaining the purpose of Homee ID"
+    },
+    "saveButton": "Save",
+    "@saveButton": {
+        "description": "Button text for saving the sign-up details"
+    }
+}

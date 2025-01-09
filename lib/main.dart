@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 import 'package:homeegram/core/router/app_router.dart';
-import 'package:homeegram/features/auth/presentation/pages/login_page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final FlutterLocalization _localization = FlutterLocalization.instance;
     return MaterialApp.router(
       title: 'Homeegram',
       routerConfig: AppRouter.router,
@@ -21,6 +22,12 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
+      locale: Locale('en'),
+      supportedLocales: [Locale('en'), Locale('ml')],
+      localizationsDelegates: [
+        AppLocalizations.delegate,
+        ..._localization.localizationsDelegates
+      ],
     );
   }
 }

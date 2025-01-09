@@ -1,0 +1,19 @@
+{
+    "loginWelcome": "ഹോമീറ കുടുംബത്തിലേക്ക് സ്വാഗതം!",
+    "loginSubtitle": "നമ്മുടെ സ്വപ്നങ്ങൾ ഒരുമിച്ച് സാക്ഷാത്കരിക്കാം",
+    "appName": "ഹോമീഗ്രാം",
+    "mobileHint": "മൊബൈൽ",
+    "getOtpButton": "OTP നേടുക!",
+    "orContinueWith": "അല്ലെങ്കിൽ തുടരുക",
+    "agreeTerms": "ഞാൻ നിബന്ധനകളും സ്വകാര്യതാ നയവും അംഗീകരിക്കുന്നു",
+    "otpVerification": "OTP സ്ഥിരീകരണം",
+    "otpInstruction": "നിങ്ങളുടെ മൊബൈൽ നമ്പറിലേക്ക് അയച്ച OTP നൽകുക",
+    "didNotReceiveOtp": "OTP ലഭ്യമാകുന്നില്ലേ?",
+    "resendOtp": "OTP വീണ്ടും അയയ്ക്കുക",
+    "verifyAndProceedButton": "സാധൂകരിച്ച് മുന്നോട്ട് പോവുക",
+    "signUp": "സൈനപ്",
+    "profileName": "പ്രൊഫൈൽ പേര്",
+    "homeeId": "ഹോമീ ഐഡി",
+    "homeeIdHint": "*ഹോമീ ഐഡി നിങ്ങളുടെ പ്രൊഫൈലിനായി നിങ്ങൾ സ്വയം സൃഷ്ടിച്ച യൂസർനെയിമാണ്!",
+    "saveButton": "സേവ് ചെയ്യുക"
+}
