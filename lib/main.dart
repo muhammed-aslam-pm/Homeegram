@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:homeegram/core/router/app_router.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:homeegram/core/theme/app_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,10 +19,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       title: 'Homeegram',
       routerConfig: AppRouter.router,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      // theme: ThemeData(
+      //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      //   useMaterial3: true,
+      // ),
+      theme: AppTheme.lightTheme,
       locale: Locale('en'),
       supportedLocales: [Locale('en'), Locale('ml')],
       localizationsDelegates: [

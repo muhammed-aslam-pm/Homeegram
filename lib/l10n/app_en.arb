@@ -1,10 +1,14 @@
 {
-    "loginWelcome": "Welcome to Homeeera Family!",
+    "loginWelcome": "Welcome to",
     "@loginWelcome": {
         "description": "Login page first title"
     },
-    "loginSubtitle": "Let's Build Dreams Together",
-    "@loginSubtitle": {
+    "loginSubtitle1": "Homeera Family!",
+    "@loginSubtitle1": {
+        "description": "Subtitle under login welcome text"
+    },
+    "loginSubtitle2": "Let's Build Dreams Together",
+    "@loginSubtitle2": {
         "description": "Subtitle under login welcome text"
     },
     "appName": "Homeegram",
