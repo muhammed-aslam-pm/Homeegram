@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:homeegram/core/navigation/navigation_extensions.dart';
 import 'package:homeegram/core/shared/animations/transformAnimation.dart';
-import 'package:homeegram/core/shared/widgets/app_logo_with_text.dart';
 import 'package:homeegram/core/theme/app_colors.dart';
 import 'package:homeegram/features/auth/presentation/widgets/login_back_page_layout.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:homeegram/features/auth/presentation/widgets/login_button.dart';
+import 'package:homeegram/features/auth/presentation/widgets/login_top_section.dart';
 import 'package:pinput/pinput.dart';
 
 class OtpVerificationPage extends StatelessWidget {
@@ -12,47 +13,11 @@ class OtpVerificationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BasePageScaffold(
-      topSection: _buildTopSection(context),
-      bottomSection: _buildBottomSection(context),
-      isScrollable: false, // Set to true if content needs scrolling
-    );
-  }
-
-  Widget _buildTopSection(BuildContext context) {
     final localization = AppLocalizations.of(context);
-    final screenWidhth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
-    return AnimatedWrapper(
-      duration: const Duration(milliseconds: 500),
-      translateY: 50,
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: screenWidhth * 0.08,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            SizedBox(height: 20),
-            AppLogoWithText(
-              height: screenHeight * 0.09,
-            ),
-            Text(
-              localization!.otpVerification,
-              style: TextStyle(
-                  fontSize: 34,
-                  color: AppColors.lightTextPrimary,
-                  fontWeight: FontWeight.w500,
-                  height: 2),
-              textHeightBehavior: TextHeightBehavior(
-                applyHeightToFirstAscent: false,
-                applyHeightToLastDescent: false,
-              ),
-            ),
-          ],
-        ),
-      ),
+    return BaseAuthPageScaffold(
+      topSection: LoginTopSection(text: localization!.otpVerification),
+      bottomSection: _buildBottomSection(context),
+      isScrollable: false,
     );
   }
 
@@ -62,13 +27,13 @@ class OtpVerificationPage extends StatelessWidget {
     final localization = AppLocalizations.of(context);
 
     return Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: screenWidth * 0.07,
-          vertical: screenHeight * 0.08,
+        padding: EdgeInsets.only(
+          left: screenWidth * 0.07,
+          right: screenWidth * 0.07,
+          top: screenHeight * 0.08,
+          bottom: screenHeight * 0.14,
         ),
         child: AnimatedWrapper(
-          duration: const Duration(milliseconds: 500),
-          translateY: 50,
           child: Column(
             children: [
               _buildNumberSection(localization),
@@ -81,17 +46,11 @@ class OtpVerificationPage extends StatelessWidget {
               SizedBox(height: screenHeight * 0.035),
               LoginButton(
                 text: localization!.verifyAndProceedButton,
-                onPressed: () {},
+                onPressed: () {
+                  context.pushSignUp();
+                },
                 height: screenHeight * 0.07,
               ),
-
-              // const SizedBox(height: 20),
-              // const Spacer(),
-              // _buildOrDivider(localization: localization),
-              // const Spacer(),
-              // _buildGoogleButton(),
-              // const Spacer(),
-              // _buildTermsAndConditions(localization: localization),
             ],
           ),
         ));

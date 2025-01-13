@@ -70,5 +70,117 @@
     "saveButton": "Save",
     "@saveButton": {
         "description": "Button text for saving the sign-up details"
+    },
+    "chooseCategoryTitle": "Choose Category!",
+    "@chooseCategoryTitle": {
+        "description": "Title text for the category selection screen"
+    },
+    "homeOwner": "Home Owner",
+    "@homeOwner": {
+        "description": "Category option for Home Owner"
+    },
+    "professionals": "Professionals",
+    "@professionals": {
+        "description": "Category option for Professionals"
+    },
+    "shopMaterials": "Shop/Materials",
+    "@shopMaterials": {
+        "description": "Category option for Shop/Materials"
+    },
+    "homeOwnerDescription": "Home Owner, Who joined our family for finding new home designs & trending materials.",
+    "@homeOwnerDescription": {
+        "description": "Description text for Home Owner category"
+    },
+    "nextButton": "Next",
+    "@nextButton": {
+        "description": "Button text for proceeding to the next screen"
+    },
+    "selectInterestsTitle": "Select Any 3 Interests!",
+    "@selectInterestsTitle": {
+        "description": "Title text for the interests selection screen"
+    },
+    "interestArchitecture": "Architecture",
+    "@interestArchitecture": {
+        "description": "Interest option for Architecture"
+    },
+    "interestRealEstate": "Real Estate",
+    "@interestRealEstate": {
+        "description": "Interest option for Real Estate"
+    },
+    "interestLandscape": "Landscape",
+    "@interestLandscape": {
+        "description": "Interest option for Landscape"
+    },
+    "interestInteriorDesign": "Interior Design",
+    "@interestInteriorDesign": {
+        "description": "Interest option for Interior Design"
+    },
+    "interestAutomation": "Automation",
+    "@interestAutomation": {
+        "description": "Interest option for Automation"
+    },
+    "interestDecors": "Decors",
+    "@interestDecors": {
+        "description": "Interest option for Decors"
+    },
+      "chooseProfessionalCategoryTitle": "Choose your Professional Catagory",
+    "@chooseProfessionalCategoryTitle": {
+        "description": "Title displayed for selecting professional categories"
+    },
+    "nextButton": "Next",
+    "@nextButton": {
+        "description": "Button text for proceeding to the next step"
+    },
+    "profileInformationTitle": "Profile Information",
+    "@profileInformationTitle": {
+        "description": "Title displayed for the profile information section"
+    },
+    "profileTaglineLabel": "Profile Tagline",
+    "@profileTaglineLabel": {
+        "description": "Label for the profile tagline input field"
+    },
+    "bioLabel": "Bio",
+    "@bioLabel": {
+        "description": "Label for the biography input field"
+    },
+    "companyNameLabel": "Company Name",
+    "@companyNameLabel": {
+        "description": "Label for the company name input field"
+    },
+    "websiteAddressLabel": "Website address",
+    "@websiteAddressLabel": {
+        "description": "Label for the website address input field"
+    },
+    "experienceLabel": "Experience",
+    "@experienceLabel": {
+        "description": "Label for the experience input field"
+    },
+    "experienceTypePlaceholder": "Month",
+    "@experienceTypePlaceholder": {
+        "description": "Placeholder for selecting the type of experience duration"
+    },
+    "registrationNumberLabel": "Registration No",
+    "@registrationNumberLabel": {
+        "description": "Label for the registration number input field"
+    },
+    "achievementsLabel": "Achievements",
+    "@achievementsLabel": {
+        "description": "Label for the achievements input field"
+    },
+    "addAchievementButton": "+",
+    "@addAchievementButton": {
+        "description": "Button for adding new achievements"
+    },
+    "officeTimeLabel": "Office Time",
+    "@officeTimeLabel": {
+        "description": "Label for the office time input field"
+    },
+    "servicesProvidedLabel": "Services Provided",
+    "@servicesProvidedLabel": {
+        "description": "Label for the services provided input field"
+    },
+    "officeAddressLabel": "Office address",
+    "@officeAddressLabel": {
+        "description": "Label for the office address input field"
     }
 }

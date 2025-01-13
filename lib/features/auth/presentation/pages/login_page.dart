@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:go_router/go_router.dart';
 import 'package:homeegram/core/constants/icons.dart';
-import 'package:homeegram/core/constants/images.dart';
 import 'package:homeegram/core/navigation/navigation_extensions.dart';
 import 'package:homeegram/core/shared/animations/transformAnimation.dart';
 import 'package:homeegram/core/shared/widgets/app_logo_with_text.dart';
@@ -11,46 +9,12 @@ import 'package:homeegram/features/auth/presentation/widgets/login_back_page_lay
 import 'package:homeegram/features/auth/presentation/widgets/login_button.dart';
 import 'package:homeegram/features/auth/presentation/widgets/text_form_field.dart';
 
-// class LoginPage extends StatelessWidget {
-//   const LoginPage({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final _localization = AppLocalizations.of(context);
-
-//     return Scaffold(
-//       backgroundColor: AppColors.lightPrimary,
-//       body: Column(
-//         children: [
-//           Expanded(flex: 2, child: _buildTopSection(context)),
-//           Expanded(
-//             flex: 4,
-//             child: Container(
-//               width: double.infinity,
-//               height: double.infinity,
-//               decoration: BoxDecoration(
-//                 color: AppColors.lightSurface,
-//                 borderRadius: BorderRadius.vertical(
-//                   top: Radius.circular(50),
-//                 ),
-//               ),
-//               padding: EdgeInsets.all(10),
-//               child: _buildBottomSection(context),
-//             ),
-//           )
-//         ],
-//       ),
-//     );
-//   }
-
-import 'package:flutter/material.dart';
-
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BasePageScaffold(
+    return BaseAuthPageScaffold(
       topSection: _buildTopSection(context),
       bottomSection: _buildBottomSection(context),
       isScrollable: false, // Set to true if content needs scrolling
@@ -68,8 +32,6 @@ class LoginPage extends StatelessWidget {
           vertical: screenHeight * 0.045,
         ),
         child: AnimatedWrapper(
-          duration: const Duration(milliseconds: 500),
-          translateY: 50,
           child: Column(
             children: [
               AppLogoWithText(height: screenHeight * 0.08),
@@ -98,18 +60,18 @@ class LoginPage extends StatelessWidget {
   Widget _buildTopSection(BuildContext context) {
     final localization = AppLocalizations.of(context);
     final screenWidhth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
     return AnimatedWrapper(
-      duration: const Duration(milliseconds: 500),
-      translateY: 50,
+      direction: AnimationDirection.top,
       child: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: screenWidhth * 0.08,
+          horizontal: screenWidhth * 0.07,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height: 20),
+            SizedBox(height: screenHeight * 0.07),
             Text(
               localization!.loginWelcome,
               style: TextStyle(
@@ -251,60 +213,3 @@ class LoginPage extends StatelessWidget {
         ],
       );
 }
-
-//   Widget _buildTopSection(BuildContext context) {
-//     final _screenHeight = MediaQuery.of(context).size.height;
-//     final _screenWidhth = MediaQuery.of(context).size.width;
-//     final _localization = AppLocalizations.of(context);
-//     return SizedBox(
-//       width: double.infinity,
-//       child: Padding(
-//         padding: EdgeInsets.symmetric(
-//           horizontal: _screenWidhth * 0.08,
-//         ),
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: [
-//             Text(
-//               _localization!.loginWelcome,
-//               style: TextStyle(
-//                   fontSize: 28,
-//                   color: AppColors.lightTextPrimary,
-//                   fontWeight: FontWeight.w500,
-//                   height: 2),
-//               textHeightBehavior: TextHeightBehavior(
-//                 applyHeightToFirstAscent: true,
-//                 applyHeightToLastDescent: false,
-//               ),
-//             ),
-//             Text(
-//               _localization!.loginSubtitle1,
-//               style: TextStyle(
-//                   fontSize: 34,
-//                   color: AppColors.lightTextPrimary,
-//                   fontWeight: FontWeight.w500,
-//                   height: 2),
-//               textHeightBehavior: TextHeightBehavior(
-//                 applyHeightToFirstAscent: false,
-//                 applyHeightToLastDescent: false,
-//               ),
-//             ),
-//             Text(
-//               _localization!.loginSubtitle2,
-//               style: TextStyle(
-//                   fontSize: 26,
-//                   color: AppColors.lightTextPrimary,
-//                   fontWeight: FontWeight.w400,
-//                   height: 2),
-//               textHeightBehavior: TextHeightBehavior(
-//                 applyHeightToFirstAscent: false,
-//                 applyHeightToLastDescent: false,
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
