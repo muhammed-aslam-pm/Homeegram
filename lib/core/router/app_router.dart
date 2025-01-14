@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:homeegram/core/router/scaffold_with_nav.dart';
 import 'package:homeegram/features/auth/presentation/pages/category_choose_page.dart';
-import 'package:homeegram/features/auth/presentation/pages/home_page.dart';
+import 'package:homeegram/features/home/home_page.dart';
 import 'package:homeegram/features/auth/presentation/pages/interest_selection_page.dart';
 import 'package:homeegram/features/auth/presentation/pages/login_page.dart';
 import 'package:homeegram/features/auth/presentation/pages/otp_verification_page.dart';

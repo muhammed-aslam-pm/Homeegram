@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:homeegram/core/shared/animations/transformAnimation.dart';
 import 'package:homeegram/core/shared/widgets/app_logo_with_text.dart';
-import 'package:homeegram/core/theme/app_colors.dart';
+import 'package:homeegram/core/config/theme/app_colors.dart';
 
 class LoginTopSection extends StatelessWidget {
   final String text;

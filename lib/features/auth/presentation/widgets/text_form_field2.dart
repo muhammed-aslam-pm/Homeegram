@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:homeegram/core/theme/app_colors.dart';
+import 'package:homeegram/core/config/theme/app_colors.dart';
 
 class CustomTextField2 extends StatelessWidget {
   final String? label;

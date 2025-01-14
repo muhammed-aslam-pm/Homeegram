@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:homeegram/core/constants/images.dart';
-import 'package:homeegram/core/theme/app_colors.dart';
+import 'package:homeegram/core/config/theme/app_colors.dart';
 
 class AppLogoWithText extends StatelessWidget {
   final double? height;

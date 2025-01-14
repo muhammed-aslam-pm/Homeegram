@@ -4,7 +4,7 @@ import 'package:homeegram/core/constants/icons.dart';
 import 'package:homeegram/core/navigation/navigation_extensions.dart';
 import 'package:homeegram/core/shared/animations/transformAnimation.dart';
 import 'package:homeegram/core/shared/widgets/app_logo_with_text.dart';
-import 'package:homeegram/core/theme/app_colors.dart';
+import 'package:homeegram/core/config/theme/app_colors.dart';
 import 'package:homeegram/features/auth/presentation/widgets/login_back_page_layout.dart';
 import 'package:homeegram/features/auth/presentation/widgets/login_button.dart';
 import 'package:homeegram/features/auth/presentation/widgets/text_form_field.dart';

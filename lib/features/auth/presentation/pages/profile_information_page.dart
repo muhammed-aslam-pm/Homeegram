@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:homeegram/core/navigation/navigation_extensions.dart';
 import 'package:homeegram/core/shared/animations/transformAnimation.dart';
-import 'package:homeegram/core/theme/app_colors.dart';
+import 'package:homeegram/core/config/theme/app_colors.dart';
 import 'package:homeegram/features/auth/presentation/widgets/custom_drop_down.dart';
 import 'package:homeegram/features/auth/presentation/widgets/login_back_page_layout.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
