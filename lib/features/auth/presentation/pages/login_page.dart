@@ -28,13 +28,13 @@ class LoginPage extends StatelessWidget {
 
     return Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: screenWidth * 0.07,
-          vertical: screenHeight * 0.045,
+          horizontal: screenWidth * 0.09,
+          vertical: screenHeight * 0.048,
         ),
         child: AnimatedWrapper(
           child: Column(
             children: [
-              AppLogoWithText(height: screenHeight * 0.08),
+              AppLogoWithText(height: screenHeight * 0.07),
               const Spacer(),
               _buildMobileTextField(),
               SizedBox(height: screenHeight * 0.03),
@@ -43,7 +43,7 @@ class LoginPage extends StatelessWidget {
                 onPressed: () {
                   context.pushOtpVerification();
                 },
-                height: screenHeight * 0.07,
+                height: screenHeight * 0.06,
               ),
               const SizedBox(height: 20),
               const Spacer(),
@@ -96,16 +96,18 @@ class LoginPage extends StatelessWidget {
                 applyHeightToLastDescent: false,
               ),
             ),
-            Text(
-              localization!.loginSubtitle2,
-              style: TextStyle(
-                  fontSize: 26,
-                  color: AppColors.lightTextPrimary,
-                  fontWeight: FontWeight.w400,
-                  height: 2),
-              textHeightBehavior: TextHeightBehavior(
-                applyHeightToFirstAscent: false,
-                applyHeightToLastDescent: false,
+            FittedBox(
+              child: Text(
+                localization!.loginSubtitle2,
+                style: TextStyle(
+                    fontSize: 26,
+                    color: AppColors.lightTextPrimary,
+                    fontWeight: FontWeight.w400,
+                    height: 2),
+                textHeightBehavior: TextHeightBehavior(
+                  applyHeightToFirstAscent: false,
+                  applyHeightToLastDescent: false,
+                ),
               ),
             ),
           ],
@@ -154,7 +156,7 @@ class LoginPage extends StatelessWidget {
           SizedBox(
             width: 10,
           ),
-          Expanded(
+          FittedBox(
             child: Text(
               localization!.agreeTerms,
               textAlign: TextAlign.center,
@@ -168,14 +170,14 @@ class LoginPage extends StatelessWidget {
           borderRadius: BorderRadius.circular(30),
           border: Border.all(color: AppColors.grey1, width: 3),
         ),
-        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+        padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             Image.asset(
               AppIcons.googleIcon,
-              height: 22,
-              width: 22,
+              height: 21,
+              width: 21,
             ),
             SizedBox(width: 5),
             Text(
@@ -192,7 +194,7 @@ class LoginPage extends StatelessWidget {
         children: [
           Expanded(
             child: Container(
-              height: 3,
+              height: 2,
               // width: double.infinity,
               color: AppColors.lightTextPrimary,
             ),
@@ -200,12 +202,12 @@ class LoginPage extends StatelessWidget {
           SizedBox(width: 10),
           Text(
             localization!.orContinueWith,
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           SizedBox(width: 10),
           Expanded(
             child: Container(
-              height: 3,
+              height: 2,
               // width: double.infinity,
               color: AppColors.lightTextPrimary,
             ),

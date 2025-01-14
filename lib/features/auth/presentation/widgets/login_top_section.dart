@@ -20,7 +20,7 @@ class LoginTopSection extends StatelessWidget {
       direction: AnimationDirection.top,
       child: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: screenWidth * 0.08,
+          horizontal: screenWidth * 0.09,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -28,17 +28,17 @@ class LoginTopSection extends StatelessWidget {
           children: [
             const SizedBox(height: 20),
             AppLogoWithText(
-              height: screenHeight * 0.09,
+              height: screenHeight * 0.07,
             ),
             Text(
               text,
               style: const TextStyle(
-                fontSize: 32,
+                fontSize: 28,
                 color: AppColors.lightTextPrimary,
                 fontWeight: FontWeight.w500,
                 // height: 2,
               ),
-              textScaler: TextScaler.linear(0.95 ),
+              textScaler: TextScaler.linear(0.95),
             ),
           ],
         ),

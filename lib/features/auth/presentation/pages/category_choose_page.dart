@@ -36,8 +36,8 @@ class _CategoryChoosePageState extends State<CategoryChoosePage> {
 
     return Padding(
       padding: EdgeInsets.only(
-        left: screenWidth * 0.07,
-        right: screenWidth * 0.07,
+        left: screenWidth * 0.09,
+        right: screenWidth * 0.09,
         top: screenHeight * 0.08,
         bottom: screenHeight * 0.14,
       ),
@@ -52,7 +52,7 @@ class _CategoryChoosePageState extends State<CategoryChoosePage> {
               onPressed: () {
                 context.pushInterestSelectionPage();
               },
-              height: screenHeight * 0.07,
+              height: screenHeight * 0.065,
             ),
           ],
         ),
@@ -100,7 +100,7 @@ class _CategoryChoosePageState extends State<CategoryChoosePage> {
               child: Text(
                 title,
                 style: TextStyle(
-                  fontSize: 24,
+                  fontSize: 20,
                   color: AppColors.lightTextPrimary,
                   fontWeight: FontWeight.w500,
                   height: 2,
@@ -170,7 +170,7 @@ class _CategoryChoosePageState extends State<CategoryChoosePage> {
       child: Text(
         title,
         style: TextStyle(
-          fontSize: 24,
+          fontSize: 20,
           color: AppColors.lightTextPrimary,
           fontWeight: FontWeight.w500,
           height: 2,

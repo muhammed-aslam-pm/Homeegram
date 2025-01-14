@@ -39,8 +39,8 @@ class _ProfessionalCategoryChoosePageState
 
     return Padding(
         padding: EdgeInsets.only(
-          left: screenWidth * 0.07,
-          right: screenWidth * 0.07,
+          left: screenWidth * 0.09,
+          right: screenWidth * 0.09,
           top: screenHeight * 0.05,
           bottom: screenHeight * 0.06,
         ),
@@ -54,7 +54,7 @@ class _ProfessionalCategoryChoosePageState
                 onPressed: () {
                   context.pushProfileInformationFormPage();
                 },
-                height: screenHeight * 0.07,
+                height: screenHeight * 0.065,
               ),
             ],
           ),

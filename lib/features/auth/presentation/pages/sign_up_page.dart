@@ -29,8 +29,8 @@ class SignUpPage extends StatelessWidget {
 
     return Padding(
         padding: EdgeInsets.only(
-          left: screenWidth * 0.07,
-          right: screenWidth * 0.07,
+          left: screenWidth * 0.09,
+          right: screenWidth * 0.09,
           top: screenHeight * 0.08,
           bottom: screenHeight * 0.14,
         ),
@@ -49,7 +49,7 @@ class SignUpPage extends StatelessWidget {
                 onPressed: () {
                   context.pushChooseCategory();
                 },
-                height: screenHeight * 0.07,
+                height: screenHeight * 0.065,
               ),
             ],
           ),

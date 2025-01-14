@@ -29,8 +29,8 @@ class InterestSelectionPage extends StatelessWidget {
 
     return Padding(
         padding: EdgeInsets.only(
-          left: screenWidth * 0.07,
-          right: screenWidth * 0.07,
+          left: screenWidth * 0.09,
+          right: screenWidth * 0.09,
           top: screenHeight * 0.08,
           bottom: screenHeight * 0.14,
         ),
@@ -44,7 +44,7 @@ class InterestSelectionPage extends StatelessWidget {
                 onPressed: () {
                   context.pushProfessionalCategoryChoosePage();
                 },
-                height: screenHeight * 0.07,
+                height: screenHeight * 0.065,
               ),
             ],
           ),
@@ -66,7 +66,7 @@ class InterestSelectionPage extends StatelessWidget {
       children: interests
           .map((interest) => Chip(
                 labelStyle:
-                    TextStyle(color: AppColors.lightTextPrimary, fontSize: 20),
+                    TextStyle(color: AppColors.lightTextPrimary, fontSize: 18),
                 label: Text(interest),
                 side: BorderSide(width: 0, style: BorderStyle.none),
                 color: WidgetStatePropertyAll(AppColors.grey2),

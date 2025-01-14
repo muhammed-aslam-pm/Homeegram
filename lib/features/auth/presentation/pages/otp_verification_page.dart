@@ -28,8 +28,8 @@ class OtpVerificationPage extends StatelessWidget {
 
     return Padding(
         padding: EdgeInsets.only(
-          left: screenWidth * 0.07,
-          right: screenWidth * 0.07,
+          left: screenWidth * 0.09,
+          right: screenWidth * 0.09,
           top: screenHeight * 0.08,
           bottom: screenHeight * 0.14,
         ),
@@ -49,7 +49,7 @@ class OtpVerificationPage extends StatelessWidget {
                 onPressed: () {
                   context.pushSignUp();
                 },
-                height: screenHeight * 0.07,
+                height: screenHeight * 0.065,
               ),
             ],
           ),
@@ -64,10 +64,10 @@ class OtpVerificationPage extends StatelessWidget {
         Text(
           localization!.otpInstruction,
           style: TextStyle(
-              fontSize: 21,
-              color: AppColors.lightTextPrimary,
-              fontWeight: FontWeight.w500,
-              height: 2),
+            fontSize: 19,
+            color: AppColors.lightTextPrimary,
+            fontWeight: FontWeight.w500,
+          ),
           textAlign: TextAlign.center,
           textHeightBehavior: TextHeightBehavior(
             applyHeightToFirstAscent: false,
@@ -77,7 +77,7 @@ class OtpVerificationPage extends StatelessWidget {
         Text(
           "91 7025169934",
           style: TextStyle(
-              fontSize: 28,
+              fontSize: 26,
               color: AppColors.lightTextPrimary,
               fontWeight: FontWeight.w500,
               height: 2),
@@ -98,10 +98,10 @@ class OtpVerificationPage extends StatelessWidget {
           Text(
             localization!.didNotReceiveOtp,
             style: TextStyle(
-                fontSize: 21,
-                color: AppColors.lightTextPrimary,
-                fontWeight: FontWeight.w500,
-                height: 2),
+              fontSize: 19,
+              color: AppColors.lightTextPrimary,
+              fontWeight: FontWeight.w500,
+            ),
             textAlign: TextAlign.center,
             textHeightBehavior: TextHeightBehavior(
               applyHeightToFirstAscent: false,
@@ -111,10 +111,10 @@ class OtpVerificationPage extends StatelessWidget {
           Text(
             localization!.resendOtp,
             style: TextStyle(
-                fontSize: 18,
-                color: AppColors.lightPrimary,
-                fontWeight: FontWeight.w500,
-                height: 2),
+              fontSize: 16,
+              color: AppColors.lightPrimary,
+              fontWeight: FontWeight.w500,
+            ),
             textHeightBehavior: TextHeightBehavior(
               applyHeightToFirstAscent: false,
               applyHeightToLastDescent: false,
@@ -128,8 +128,8 @@ class OtpVerificationPage extends StatelessWidget {
       onCompleted: (pin) => print(pin),
       showCursor: true,
       defaultPinTheme: PinTheme(
-        width: 56,
-        height: 56,
+        width: 54,
+        height: 54,
         textStyle: TextStyle(
             fontSize: 20,
             color: Color.fromRGBO(30, 60, 87, 1),
