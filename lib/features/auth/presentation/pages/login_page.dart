@@ -1,50 +1,102 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:homeegram/core/constants/icons.dart';
 import 'package:homeegram/core/navigation/navigation_extensions.dart';
 import 'package:homeegram/core/shared/animations/transformAnimation.dart';
 import 'package:homeegram/core/shared/widgets/app_logo_with_text.dart';
 import 'package:homeegram/core/config/theme/app_colors.dart';
+import 'package:homeegram/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:homeegram/features/auth/presentation/widgets/login_back_page_layout.dart';
 import 'package:homeegram/features/auth/presentation/widgets/login_button.dart';
 import 'package:homeegram/features/auth/presentation/widgets/text_form_field.dart';
+import 'package:homeegram/service_locator.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BaseAuthPageScaffold(
-      topSection: _buildTopSection(context),
-      bottomSection: _buildBottomSection(context),
-      isScrollable: false, // Set to true if content needs scrolling
+    return BlocProvider(
+      create: (context) => sl<AuthBloc>(),
+      child: const LoginView(),
+    );
+  }
+}
+
+class LoginView extends StatelessWidget {
+  const LoginView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<AuthBloc, AuthState>(
+      listener: (context, state) {
+        if (state is OtpSent) {
+          context.pushOtpVerification();
+        } else if (state is AuthError) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(state.message)),
+          );
+        }
+      },
+      builder: (context, state) {
+        return BaseAuthPageScaffold(
+          topSection: _buildTopSection(context),
+          bottomSection: _buildBottomSection(context, state),
+          isScrollable: false,
+        );
+      },
     );
   }
 
-  Widget _buildBottomSection(BuildContext context) {
+
+
+
+  Widget _buildBottomSection(BuildContext context, AuthState state) {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
     final localization = AppLocalizations.of(context);
+    final phoneController = TextEditingController();
 
     return Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: screenWidth * 0.09,
-          vertical: screenHeight * 0.048,
-        ),
-        child: AnimatedWrapper(
-          child: Column(
-            children: [
-              AppLogoWithText(height: screenHeight * 0.07),
-              const Spacer(),
-              _buildMobileTextField(),
-              SizedBox(height: screenHeight * 0.03),
-              LoginButton(
-                text: localization!.getOtpButton,
-                onPressed: () {
-                  context.pushOtpVerification();
-                },
-                height: screenHeight * 0.06,
+      padding: EdgeInsets.symmetric(
+        horizontal: screenWidth * 0.09,
+        vertical: screenHeight * 0.048,
+      ),
+      child: AnimatedWrapper(
+        child: Column(
+          children: [
+            AppLogoWithText(height: screenHeight * 0.07),
+            const Spacer(),
+            CustomTextFormField(
+              controller: phoneController,
+              hintText: "Mobile",
+              prefixIcon: const SizedBox(
+                height: 30,
+                width: 30,
+                child: Center(
+                  child: Text("🇮🇳", style: TextStyle(fontSize: 20)),
+                ),
               ),
+              prefixText: "+91",
+            ),
+            SizedBox(height: screenHeight * 0.03),
+            LoginButton(
+              text: localization!.getOtpButton,
+              onPressed: state is AuthLoading
+                  ? null
+                  : () {
+                      final phone = phoneController.text.trim();
+                      if (phone.isNotEmpty) {
+                        context.read<AuthBloc>().add(SendOtpEvent(phone));
+                      }
+                    },
+              height: screenHeight * 0.06,
+              // Show loading indicator if state is AuthLoading
+              isLoading: state is AuthLoading
+                  ? true
+                  : false,
+            ),
               const SizedBox(height: 20),
               const Spacer(),
               _buildOrDivider(localization: localization),
@@ -156,10 +208,11 @@ class LoginPage extends StatelessWidget {
           SizedBox(
             width: 10,
           ),
-          FittedBox(
+          FittedBox(fit: BoxFit.fitWidth,
             child: Text(
               localization!.agreeTerms,
               textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
               style: TextStyle(color: AppColors.grey1),
             ),
           )
