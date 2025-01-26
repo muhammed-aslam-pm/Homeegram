@@ -1,31 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:homeegram/core/navigation/navigation_extensions.dart';
 import 'package:homeegram/core/shared/animations/transformAnimation.dart';
 import 'package:homeegram/core/config/theme/app_colors.dart';
 import 'package:homeegram/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:homeegram/features/auth/presentation/widgets/login_back_page_layout.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:homeegram/features/auth/presentation/widgets/login_button.dart';
 import 'package:homeegram/features/auth/presentation/widgets/login_top_section.dart';
 import 'package:homeegram/service_locator.dart';
 import 'package:pinput/pinput.dart';
 
 class OtpVerificationPage extends StatelessWidget {
-  const OtpVerificationPage({super.key});
+  final String phoneNumber; // Add a parameter for the phone number
+
+  const OtpVerificationPage({super.key, required this.phoneNumber});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => sl<AuthBloc>(),
-      child: const OtpVerificationView(),
+      child: OtpVerificationView(
+          phoneNumber: phoneNumber), // Pass the phone number
     );
   }
 }
 
 class OtpVerificationView extends StatelessWidget {
-  const OtpVerificationView({super.key});
+  final String phoneNumber; // Add a parameter for the phone number
 
+  OtpVerificationView({super.key, required this.phoneNumber});
+  final TextEditingController _otpController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AuthBloc, AuthState>(
@@ -54,7 +59,6 @@ class OtpVerificationView extends StatelessWidget {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
     final localization = AppLocalizations.of(context);
-    String otpValue = '';
 
     return Padding(
       padding: EdgeInsets.only(
@@ -70,12 +74,9 @@ class OtpVerificationView extends StatelessWidget {
             const Spacer(),
             Pinput(
               onCompleted: (pin) {
-                otpValue = pin;
                 context.read<AuthBloc>().add(VerifyOtpEvent(pin));
               },
-              onChanged: (value) {
-                otpValue = value;
-              },
+              controller: _otpController,
               showCursor: true,
               defaultPinTheme: PinTheme(
                 width: 54,
@@ -100,12 +101,14 @@ class OtpVerificationView extends StatelessWidget {
               onPressed: state is AuthLoading
                   ? null
                   : () {
-                      if (otpValue.length == 6) {
-                        context.read<AuthBloc>().add(VerifyOtpEvent(otpValue));
+                      if (_otpController.text.length == 6) {
+                        context
+                            .read<AuthBloc>()
+                            .add(VerifyOtpEvent(_otpController.text));
                       }
                     },
               height: screenHeight * 0.065,
-              isLoading: state is AuthLoading ? true : false,
+              isLoading: state is AuthLoading,
             ),
           ],
         ),
@@ -126,21 +129,14 @@ class OtpVerificationView extends StatelessWidget {
             fontWeight: FontWeight.w500,
           ),
           textAlign: TextAlign.center,
-          textHeightBehavior: TextHeightBehavior(
-            applyHeightToFirstAscent: false,
-            applyHeightToLastDescent: false,
-          ),
         ),
         Text(
-          "91 7025169934",
+          phoneNumber, // Use the dynamic phone number
           style: TextStyle(
-              fontSize: 26,
-              color: AppColors.lightTextPrimary,
-              fontWeight: FontWeight.w500,
-              height: 2),
-          textHeightBehavior: TextHeightBehavior(
-            applyHeightToFirstAscent: false,
-            applyHeightToLastDescent: false,
+            fontSize: 26,
+            color: AppColors.lightTextPrimary,
+            fontWeight: FontWeight.w500,
+            height: 2,
           ),
         ),
       ],
@@ -149,34 +145,27 @@ class OtpVerificationView extends StatelessWidget {
 
   Column _buildDidntRecieve(AppLocalizations localization) {
     return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            localization!.didNotReceiveOtp,
-            style: TextStyle(
-              fontSize: 19,
-              color: AppColors.lightTextPrimary,
-              fontWeight: FontWeight.w500,
-            ),
-            textAlign: TextAlign.center,
-            textHeightBehavior: TextHeightBehavior(
-              applyHeightToFirstAscent: false,
-              applyHeightToLastDescent: false,
-            ),
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text(
+          localization.didNotReceiveOtp,
+          style: TextStyle(
+            fontSize: 19,
+            color: AppColors.lightTextPrimary,
+            fontWeight: FontWeight.w500,
           ),
-          Text(
-            localization!.resendOtp,
-            style: TextStyle(
-              fontSize: 16,
-              color: AppColors.lightPrimary,
-              fontWeight: FontWeight.w500,
-            ),
-            textHeightBehavior: TextHeightBehavior(
-              applyHeightToFirstAscent: false,
-              applyHeightToLastDescent: false,
-            ),
+          textAlign: TextAlign.center,
+        ),
+        Text(
+          localization.resendOtp,
+          style: TextStyle(
+            fontSize: 16,
+            color: AppColors.lightPrimary,
+            fontWeight: FontWeight.w500,
           ),
-        ]);
+        ),
+      ],
+    );
   }
 }

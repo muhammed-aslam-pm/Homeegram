@@ -58,7 +58,11 @@ class AppRouter {
       GoRoute(
         path: '/otp_verification',
         name: 'otp_verification',
-        builder: (context, state) => const OtpVerificationPage(),
+        builder: (context, state) {
+          final phoneNumber =
+              state.extra as String; // Retrieve the phone number
+          return OtpVerificationPage(phoneNumber: phoneNumber);
+        },
       ),
       // SignUp Page
       GoRoute(

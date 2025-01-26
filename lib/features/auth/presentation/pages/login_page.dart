@@ -45,7 +45,8 @@ class _LoginViewState extends State<LoginView> {
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is OtpSent) {
-          context.pushOtpVerification();
+          context.pushOtpVerification(
+              phoneNumber: _phoneController.text.trim());
         } else if (state is AuthFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(state.error)),

@@ -6,8 +6,11 @@ extension NavigationExtensions on BuildContext {
     goNamed('login'); // Push to login
   }
 
-  void pushOtpVerification() {
-    pushNamed('otp_verification');
+  void pushOtpVerification({required String phoneNumber}) {
+    goNamed(
+      'otp_verification',
+      extra: phoneNumber, // Pass the phone number as an extra
+    );
   }
 
   void pushSignUp() {
