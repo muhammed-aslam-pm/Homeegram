@@ -2,9 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:homeegram/core/constants/api_constants.dart';
 import 'package:homeegram/core/network/dio_interceptors.dart';
 
-class DioClient {
+class ApiClient {
   late final Dio _dio;
-  DioClient()
+  ApiClient()
       : _dio = Dio(
           BaseOptions(
               baseUrl: ApiUrls.baseURL,

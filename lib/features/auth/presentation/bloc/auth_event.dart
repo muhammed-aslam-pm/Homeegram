@@ -2,6 +2,7 @@ part of 'auth_bloc.dart';
 
 @immutable
 abstract class AuthEvent {}
+
 class SendOtpEvent extends AuthEvent {
   final String phoneNumber;
   SendOtpEvent(this.phoneNumber);
@@ -20,7 +21,8 @@ class SignUpEvent extends AuthEvent {
 
 class SelectCategoryEvent extends AuthEvent {
   final String category; // 'homeowner', 'professional', or 'shop'
-  SelectCategoryEvent(this.category);
+  final String? subCategory; // Optional for professionals
+  SelectCategoryEvent(this.category, this.subCategory);
 }
 
 class SelectInterestsEvent extends AuthEvent {

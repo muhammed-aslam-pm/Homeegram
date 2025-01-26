@@ -32,15 +32,15 @@ class OtpVerificationView extends StatelessWidget {
       listener: (context, state) {
         if (state is OtpVerified) {
           context.pushSignUp();
-        } else if (state is AuthError) {
+        } else if (state is AuthFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.message)),
+            SnackBar(content: Text(state.error)),
           );
         }
       },
       builder: (context, state) {
         final localization = AppLocalizations.of(context);
-        
+
         return BaseAuthPageScaffold(
           topSection: LoginTopSection(text: localization!.otpVerification),
           bottomSection: _buildBottomSection(context, state),
@@ -105,15 +105,14 @@ class OtpVerificationView extends StatelessWidget {
                       }
                     },
               height: screenHeight * 0.065,
-              isLoading: state is AuthLoading
-                  ?true
-                  : false,
+              isLoading: state is AuthLoading ? true : false,
             ),
           ],
         ),
       ),
     );
   }
+
   Column _buildNumberSection(AppLocalizations? localization) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -147,6 +146,7 @@ class OtpVerificationView extends StatelessWidget {
       ],
     );
   }
+
   Column _buildDidntRecieve(AppLocalizations localization) {
     return Column(
         mainAxisAlignment: MainAxisAlignment.center,

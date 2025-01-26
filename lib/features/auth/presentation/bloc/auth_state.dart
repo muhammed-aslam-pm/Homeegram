@@ -11,11 +11,13 @@ class OtpSent extends AuthState {}
 
 class OtpVerified extends AuthState {}
 
-class SignUpComplete extends AuthState {}
+class SignUpSuccess extends AuthState {}
 
 class CategorySelected extends AuthState {
   final String category;
-  CategorySelected(this.category);
+  final String? subCategory;
+
+  CategorySelected({required this.category, this.subCategory});
 }
 
 class InterestsSelected extends AuthState {
@@ -25,7 +27,8 @@ class InterestsSelected extends AuthState {
 
 class ProfileSaved extends AuthState {}
 
-class AuthError extends AuthState {
-  final String message;
-  AuthError(this.message);
+class AuthFailure extends AuthState {
+  final String error;
+
+  AuthFailure({required this.error});
 }

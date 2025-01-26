@@ -24,8 +24,21 @@ class LoginPage extends StatelessWidget {
   }
 }
 
-class LoginView extends StatelessWidget {
+class LoginView extends StatefulWidget {
   const LoginView({super.key});
+
+  @override
+  State<LoginView> createState() => _LoginViewState();
+}
+
+class _LoginViewState extends State<LoginView> {
+  final TextEditingController _phoneController = TextEditingController();
+
+  @override
+  void dispose() {
+    _phoneController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +46,9 @@ class LoginView extends StatelessWidget {
       listener: (context, state) {
         if (state is OtpSent) {
           context.pushOtpVerification();
-        } else if (state is AuthError) {
+        } else if (state is AuthFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.message)),
+            SnackBar(content: Text(state.error)),
           );
         }
       },
@@ -49,14 +62,10 @@ class LoginView extends StatelessWidget {
     );
   }
 
-
-
-
   Widget _buildBottomSection(BuildContext context, AuthState state) {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
     final localization = AppLocalizations.of(context);
-    final phoneController = TextEditingController();
 
     return Padding(
       padding: EdgeInsets.symmetric(
@@ -69,8 +78,8 @@ class LoginView extends StatelessWidget {
             AppLogoWithText(height: screenHeight * 0.07),
             const Spacer(),
             CustomTextFormField(
-              controller: phoneController,
-              hintText: "Mobile",
+              controller: _phoneController,
+              hintText: localization!.mobileHint,
               prefixIcon: const SizedBox(
                 height: 30,
                 width: 30,
@@ -82,42 +91,40 @@ class LoginView extends StatelessWidget {
             ),
             SizedBox(height: screenHeight * 0.03),
             LoginButton(
-              text: localization!.getOtpButton,
+              text: localization.getOtpButton,
               onPressed: state is AuthLoading
                   ? null
                   : () {
-                      final phone = phoneController.text.trim();
+                      final phone = _phoneController.text.trim();
                       if (phone.isNotEmpty) {
                         context.read<AuthBloc>().add(SendOtpEvent(phone));
                       }
                     },
               height: screenHeight * 0.06,
-              // Show loading indicator if state is AuthLoading
-              isLoading: state is AuthLoading
-                  ? true
-                  : false,
+              isLoading: state is AuthLoading,
             ),
-              const SizedBox(height: 20),
-              const Spacer(),
-              _buildOrDivider(localization: localization),
-              const Spacer(),
-              _buildGoogleButton(),
-              const Spacer(),
-              _buildTermsAndConditions(localization: localization),
-            ],
-          ),
-        ));
+            const SizedBox(height: 20),
+            const Spacer(),
+            _buildOrDivider(localization: localization),
+            const Spacer(),
+            _buildGoogleButton(localization: localization),
+            const Spacer(),
+            _buildTermsAndConditions(localization: localization),
+          ],
+        ),
+      ),
+    );
   }
 
   Widget _buildTopSection(BuildContext context) {
     final localization = AppLocalizations.of(context);
-    final screenWidhth = MediaQuery.of(context).size.width;
+    final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     return AnimatedWrapper(
       direction: AnimationDirection.top,
       child: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: screenWidhth * 0.07,
+          horizontal: screenWidth * 0.07,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -168,103 +175,94 @@ class LoginView extends StatelessWidget {
     );
   }
 
-  _buildMobileTextField() => CustomTextFormField(
-        hintText: "Mobile",
-        prefixIcon: SizedBox(
-            height: 30,
-            width: 30,
-            child: Center(
-                child: Text(
-              "🇮🇳",
-              style: TextStyle(fontSize: 20),
-            ))),
-        prefixText: "+91",
-      );
-  _buildTermsAndConditions({
-    required AppLocalizations? localization,
-  }) =>
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: 26,
-            width: 26,
-            child: Center(
-              child: IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.done,
-                  size: 12,
-                  color: AppColors.textWhite,
-                ),
-                style: ButtonStyle(
-                  backgroundColor: WidgetStatePropertyAll(
-                      AppColors.success.withValues(alpha: 0.7)),
+  Widget _buildTermsAndConditions({required AppLocalizations? localization}) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          height: 26,
+          width: 26,
+          child: Center(
+            child: IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.done,
+                size: 12,
+                color: AppColors.textWhite,
+              ),
+              style: ButtonStyle(
+                backgroundColor: WidgetStatePropertyAll(
+                  AppColors.success.withValues(alpha: 0.7),
                 ),
               ),
             ),
           ),
-          SizedBox(
-            width: 10,
-          ),
-          FittedBox(fit: BoxFit.fitWidth,
+        ),
+        const SizedBox(width: 10),
+        Flexible(
+          // Use Flexible or Expanded
+          child: FittedBox(
+            fit: BoxFit.fitWidth,
             child: Text(
               localization!.agreeTerms,
               textAlign: TextAlign.center,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(color: AppColors.grey1),
+              style: const TextStyle(color: AppColors.grey1),
             ),
-          )
-        ],
-      );
-  _buildGoogleButton() => Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
-          border: Border.all(color: AppColors.grey1, width: 3),
+          ),
         ),
-        padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Image.asset(
-              AppIcons.googleIcon,
-              height: 21,
-              width: 21,
-            ),
-            SizedBox(width: 5),
-            Text(
-              "Google",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            )
-          ],
-        ),
-      );
-  _buildOrDivider({
-    required AppLocalizations? localization,
-  }) =>
-      Row(
+      ],
+    );
+  }
+
+  Widget _buildGoogleButton({required AppLocalizations? localization}) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(30),
+        border: Border.all(color: AppColors.grey1, width: 3),
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 5),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Expanded(
-            child: Container(
-              height: 2,
-              // width: double.infinity,
-              color: AppColors.lightTextPrimary,
-            ),
+          Image.asset(
+            AppIcons.googleIcon,
+            height: 21,
+            width: 21,
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 5),
           Text(
-            localization!.orContinueWith,
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            "Google",
+            style: const TextStyle(fontWeight: FontWeight.bold),
           ),
-          SizedBox(width: 10),
-          Expanded(
-            child: Container(
-              height: 2,
-              // width: double.infinity,
-              color: AppColors.lightTextPrimary,
-            ),
-          )
         ],
-      );
+      ),
+    );
+  }
+
+  Widget _buildOrDivider({required AppLocalizations? localization}) {
+    return Row(
+      children: [
+        Expanded(
+          child: Container(
+            height: 2,
+            color: AppColors.lightTextPrimary,
+          ),
+        ),
+        const SizedBox(width: 10),
+        Text(
+          localization!.orContinueWith,
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(width: 10),
+        Expanded(
+          child: Container(
+            height: 2,
+            color: AppColors.lightTextPrimary,
+          ),
+        ),
+      ],
+    );
+  }
 }

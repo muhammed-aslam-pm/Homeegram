@@ -1,15 +1,17 @@
 import 'package:dartz/dartz.dart';
+import 'package:homeegram/core/errors/failures.dart';
 import 'package:homeegram/features/auth/data/models/generate_otp_prams.dart';
 
 abstract class AuthRepository {
-  Future<Either> generateOtp(GenerateOtpParams params);
-  Future<Either> verifyOtp(String otp);
-  Future<Either> siginUpWithProfileNameAndId(
+  Future<Either<Failure, void>> sendOtp(GenerateOtpParams params);
+  Future<Either<Failure, void>> verifyOtp(String otp);
+  Future<Either<Failure, void>> siginUpWithProfileNameAndId(
       String profileName, String profileId);
-  Future<Either> chooseProfileCategory(String profileCategory);
-  Future<Either> chooseProfessionalCategory(String profileCategory);
-  Future<Either> saveInterests(List<String> interests);
-  Future<Either> saveProfileInfo(
+  Future<Either<Failure, void>> chooseProfileCategory(String profileCategory);
+  Future<Either<Failure, void>> chooseProfessionalCategory(
+      String profileCategory);
+  Future<Either<Failure, void>> saveInterests(List<String> interests);
+  Future<Either<Failure, void>> saveProfileInfo(
     String profileGagline,
     String bio,
     String comapnyName,

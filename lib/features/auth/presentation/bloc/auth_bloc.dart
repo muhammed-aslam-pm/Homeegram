@@ -9,16 +9,14 @@ part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  final GenerateOtpUseCase generateOtp;
+  final SendOtp generateOtp;
 
   // Add other use cases as needed
 
   AuthBloc({
     required this.generateOtp,
-
   }) : super(AuthInitial()) {
-
-   on<SendOtpEvent>(_onSendOtp);
+    on<SendOtpEvent>(_onSendOtp);
     // on<VerifyOtpEvent>(_onVerifyOtp);
     // on<SignUpEvent>(_onSignUp);
     on<SelectCategoryEvent>(_onSelectCategory);
@@ -30,14 +28,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(AuthLoading());
     try {
       final params = GenerateOtpParams(phoneNumber: event.phoneNumber);
-      final result = await generateOtp(param: params);
+      final result = await generateOtp(event.phoneNumber);
       log(result.toString());
       result.fold(
-        (failure) => emit(AuthError(failure.toString())),
+        (failure) => emit(AuthFailure(error: failure.toString())),
         (_) => emit(OtpSent()),
       );
     } catch (e) {
-      emit(AuthError(e.toString()));
+      emit(AuthFailure(error: e.toString()));
     }
   }
 
@@ -76,7 +74,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     SelectCategoryEvent event,
     Emitter<AuthState> emit,
   ) async {
-    emit(CategorySelected(event.category));
+    emit(CategorySelected(
+        category: event.category, subCategory: event.subCategory));
   }
 
   Future<void> _onSelectInterests(
@@ -96,7 +95,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       // You'll need to create a use case for this
       emit(ProfileSaved());
     } catch (e) {
-      emit(AuthError(e.toString()));
+      emit(AuthFailure(error: e.toString()));
     }
   }
 }
