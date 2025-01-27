@@ -9,6 +9,7 @@ import 'package:homeegram/features/auth/presentation/pages/professionl_category_
 import 'package:homeegram/features/auth/presentation/pages/profile_information_page.dart';
 import 'package:homeegram/features/auth/presentation/pages/sign_up_page.dart';
 import 'package:homeegram/features/home/home_page.dart';
+import 'package:homeegram/features/wallet/presentation/pages/my_wallet_page.dart';
 import 'package:homeegram/features/wallet/presentation/pages/wallet_page.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey =
@@ -22,39 +23,39 @@ class AppRouter {
     initialLocation: '/login',
     debugLogDiagnostics: true,
     redirect: (context, state) async {
-      final isLoggedIn = false; // Replace with your actual auth check
-      final routeName = state.name;
+      final isLoggedIn = false; // Replace with your actual authentication logic
+      final location = state.uri.toString();
 
-      if (!isLoggedIn) {
-        // Allow access to auth-related routes
-        if (routeName == 'login' ||
-            routeName == 'otp_verification' ||
-            routeName == 'signup' ||
-            routeName == 'choose_category' ||
-            routeName == 'intersets_selection' ||
-            routeName == 'professional_category_choose' ||
-            routeName == 'profile_information_form') {
-          return null;
-        }
-        // Redirect to login for all other routes
+      // Define public routes
+      final publicRoutes = [
+        '/login',
+        '/otp_verification',
+        '/signup',
+        '/choose_category',
+        '/intersets_selection',
+        '/professional_category_choose',
+        '/profile_information_form',
+        '/my_wallet',
+      ];
+
+      // Handle unauthenticated users
+      if (!isLoggedIn && !publicRoutes.contains(location)) {
+        debugPrint('Redirecting to /login...');
         return '/login';
-      } else {
-        // Prevent logged-in users from accessing auth-related routes
-        if (routeName == 'login' ||
-            routeName == 'otp_verification' ||
-            routeName == 'signup') {
-          return '/';
-        }
       }
-      return null;
+
+      // Prevent authenticated users from accessing auth pages
+      if (isLoggedIn &&
+          ['/login', '/otp_verification', '/signup'].contains(location)) {
+        debugPrint('Redirecting to home...');
+        return '/';
+      }
+
+      debugPrint('No redirection.');
+      return null; // No redirection
     },
     routes: [
       // Login Page
-      // GoRoute(
-      //   path: '/login',
-      //   name: 'login',
-      //   builder: (context, state) => const LoginPage(),
-      // ),
       GoRoute(
         path: '/login',
         name: 'login',
@@ -100,6 +101,12 @@ class AppRouter {
         name: 'profile_information_form',
         builder: (context, state) => ProfileInformationFormPage(),
       ),
+      // My Wallet Page
+      GoRoute(
+        path: '/my_wallet',
+        name: 'my_wallet',
+        builder: (context, state) => const MyWalletPage(),
+      ),
       // Main App Shell with Bottom Navigation
       ShellRoute(
         navigatorKey: _shellNavigatorKey,
@@ -117,3 +124,9 @@ class AppRouter {
     ],
   );
 }
+  // Login Page
+      // GoRoute(
+      //   path: '/login',
+      //   name: 'login',
+      //   builder: (context, state) => const LoginPage(),
+      // ),

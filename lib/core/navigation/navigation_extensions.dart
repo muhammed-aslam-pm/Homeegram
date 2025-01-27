@@ -3,33 +3,37 @@ import 'package:go_router/go_router.dart';
 
 extension NavigationExtensions on BuildContext {
   void pushLogin() {
-    goNamed('login'); // Push to login
+    goNamed('login');
   }
 
   void pushOtpVerification({required String phoneNumber}) {
     goNamed(
       'otp_verification',
-      extra: phoneNumber, // Pass the phone number as an extra
+      extra: phoneNumber,
     );
   }
 
   void pushSignUp() {
-    pushNamed('signup');
+    goNamed('signup');
   }
 
   void pushChooseCategory() {
-    pushNamed('choose_category');
+    goNamed('choose_category');
   }
 
   void pushInterestSelectionPage() {
-    pushNamed('intersets_selection');
+    goNamed('intersets_selection');
   }
 
   void pushProfessionalCategoryChoosePage() {
-    pushNamed('professional_category_choose');
+    goNamed('professional_category_choose');
   }
 
   void pushProfileInformationFormPage() {
-    pushNamed('profile_information_form');
+    goNamed('profile_information_form');
+  }
+
+  void pushMyWalletPage() {
+    goNamed('my_wallet');
   }
 }

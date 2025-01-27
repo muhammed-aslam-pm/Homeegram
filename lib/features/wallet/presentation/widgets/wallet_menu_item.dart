@@ -15,38 +15,27 @@ class WalletMenuItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ListTile(
-          leading: Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              color: AppColors.lightPrimary.withOpacity(0.2),
-              shape: BoxShape.circle,
-            ),
-            child: Icon(
-              icon,
-              color: AppColors.lightPrimary,
-              size: 20,
-            ),
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: Row(
+        children: [
+          Icon(
+            icon,
+            color: AppColors.grey1.withValues(alpha: 0.7),
+            size: 18,
           ),
-          title: Text(
+          SizedBox(
+            width: 10,
+          ),
+          Text(
             title,
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+            style: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: AppColors.lightTextPrimary,
                   fontWeight: FontWeight.w500,
                 ),
           ),
-          trailing: Icon(
-            Icons.chevron_right_rounded,
-            color: AppColors.grey1,
-          ),
-          contentPadding:
-              const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
-        ),
-        const Divider(height: 1, color: AppColors.grey2),
-      ],
+        ],
+      ),
     );
   }
 }
