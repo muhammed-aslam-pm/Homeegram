@@ -9,6 +9,7 @@ import 'package:homeegram/features/auth/presentation/pages/professionl_category_
 import 'package:homeegram/features/auth/presentation/pages/profile_information_page.dart';
 import 'package:homeegram/features/auth/presentation/pages/sign_up_page.dart';
 import 'package:homeegram/features/home/home_page.dart';
+import 'package:homeegram/features/wallet/presentation/pages/wallet_page.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'root');
@@ -49,10 +50,15 @@ class AppRouter {
     },
     routes: [
       // Login Page
+      // GoRoute(
+      //   path: '/login',
+      //   name: 'login',
+      //   builder: (context, state) => const LoginPage(),
+      // ),
       GoRoute(
         path: '/login',
         name: 'login',
-        builder: (context, state) => const LoginPage(),
+        builder: (context, state) => const WalletPage(),
       ),
       // OTP Verification Page
       GoRoute(
