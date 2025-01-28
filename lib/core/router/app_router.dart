@@ -9,8 +9,12 @@ import 'package:homeegram/features/auth/presentation/pages/professionl_category_
 import 'package:homeegram/features/auth/presentation/pages/profile_information_page.dart';
 import 'package:homeegram/features/auth/presentation/pages/sign_up_page.dart';
 import 'package:homeegram/features/home/home_page.dart';
+import 'package:homeegram/features/wallet/presentation/pages/git_coins_page.dart';
 import 'package:homeegram/features/wallet/presentation/pages/my_wallet_page.dart';
+import 'package:homeegram/features/wallet/presentation/pages/success_screen.dart';
+import 'package:homeegram/features/wallet/presentation/pages/upgrade_wallet_page.dart';
 import 'package:homeegram/features/wallet/presentation/pages/wallet_page.dart';
+import 'package:homeegram/features/wallet/presentation/pages/wallet_verification_page.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'root');
@@ -36,6 +40,10 @@ class AppRouter {
         '/professional_category_choose',
         '/profile_information_form',
         '/my_wallet',
+        '/upgrade_wallet',
+        '/gift_coin',
+        '/wallet_verification',
+        '/success_screen',
       ];
 
       // Handle unauthenticated users
@@ -106,6 +114,30 @@ class AppRouter {
         path: '/my_wallet',
         name: 'my_wallet',
         builder: (context, state) => const MyWalletPage(),
+      ),
+      // upgrade Wallet Page
+      GoRoute(
+        path: '/upgrade_wallet',
+        name: 'upgrade_wallet',
+        builder: (context, state) => const UpgradeWalletPage(),
+      ),
+      // gift coin Page
+      GoRoute(
+        path: '/gift_coin',
+        name: 'gift_coin',
+        builder: (context, state) => const GiftCoinPage(),
+      ),
+      // wallet verification Page
+      GoRoute(
+        path: '/wallet_verification',
+        name: 'wallet_verification',
+        builder: (context, state) => const WalletVerificationPage(),
+      ),
+      // wallet verification Page
+      GoRoute(
+        path: '/success_screen',
+        name: 'success_screen',
+        builder: (context, state) => const SuccessScreen(),
       ),
       // Main App Shell with Bottom Navigation
       ShellRoute(

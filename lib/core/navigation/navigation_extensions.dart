@@ -14,26 +14,42 @@ extension NavigationExtensions on BuildContext {
   }
 
   void pushSignUp() {
-    goNamed('signup');
+    pushNamed('signup');
   }
 
   void pushChooseCategory() {
-    goNamed('choose_category');
+    pushNamed('choose_category');
   }
 
   void pushInterestSelectionPage() {
-    goNamed('intersets_selection');
+    pushNamed('intersets_selection');
   }
 
   void pushProfessionalCategoryChoosePage() {
-    goNamed('professional_category_choose');
+    pushNamed('professional_category_choose');
   }
 
   void pushProfileInformationFormPage() {
-    goNamed('profile_information_form');
+    pushNamed('profile_information_form');
   }
 
   void pushMyWalletPage() {
-    goNamed('my_wallet');
+    pushNamed('my_wallet');
+  }
+
+  void pushUpgradeWalletPage() {
+    pushNamed('upgrade_wallet');
+  }
+
+  void pushGiftCoinPage() {
+    pushNamed('gift_coin');
+  }
+
+  void walletVerificationPage() {
+    pushNamed('wallet_verification');
+  }
+
+  void successScreen() {
+    pushNamed('success_screen');
   }
 }

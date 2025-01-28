@@ -9,7 +9,8 @@ class CustomTextField2 extends StatelessWidget {
   final TextInputType keyboardType;
   final bool isRequired;
   final EdgeInsetsGeometry contentPadding;
-
+  final Widget? prefixIcon;
+  final Widget? suffixIcon;
   const CustomTextField2({
     Key? key,
     this.label,
@@ -18,8 +19,10 @@ class CustomTextField2 extends StatelessWidget {
     this.maxLines = 1,
     this.keyboardType = TextInputType.text,
     this.isRequired = false,
+    this.prefixIcon,
+    this.suffixIcon,
     this.contentPadding =
-        const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
   }) : super(key: key);
 
   @override
@@ -30,38 +33,41 @@ class CustomTextField2 extends StatelessWidget {
       keyboardType: keyboardType,
       cursorColor: AppColors.lightTSecondary,
       decoration: InputDecoration(
-        label: label != null
-            ? Text(
-                label!,
-                style: TextStyle(color: AppColors.grey1),
-              )
-            : null,
-        border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide(
-              width: 3,
-              color: AppColors.lightTSecondary,
-            )),
-        focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide(
-              width: 3,
-              color: AppColors.lightTSecondary,
-            )),
-        enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide(
-              width: 3,
-              color: AppColors.lightTSecondary,
-            )),
-        disabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide(
-              width: 3,
-              color: AppColors.lightTSecondary,
-            )),
-        contentPadding: contentPadding,
-      ),
+          prefixIcon: prefixIcon,
+          suffixIcon: suffixIcon,
+          label: label != null
+              ? Text(
+                  label!,
+                  style: TextStyle(color: AppColors.grey1),
+                )
+              : null,
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(14),
+              borderSide: BorderSide(
+                width: 2,
+                color: AppColors.lightTSecondary,
+              )),
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(14),
+              borderSide: BorderSide(
+                width: 2,
+                color: AppColors.lightTSecondary,
+              )),
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(14),
+              borderSide: BorderSide(
+                width: 2,
+                color: AppColors.lightTSecondary,
+              )),
+          disabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(14),
+              borderSide: BorderSide(
+                width: 2,
+                color: AppColors.lightTSecondary,
+              )),
+          contentPadding: contentPadding,
+          hintText: hint,
+          hintStyle: TextStyle(fontWeight: FontWeight.w500, fontSize: 14)),
     );
   }
 }
