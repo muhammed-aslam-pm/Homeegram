@@ -52,4 +52,12 @@ extension NavigationExtensions on BuildContext {
   void successScreen() {
     pushNamed('success_screen');
   }
+
+  void pushRefferalHistory() {
+    pushNamed('refferal_history');
+  }
+
+  void pushWalletHistory() {
+    pushNamed('wallet_history');
+  }
 }

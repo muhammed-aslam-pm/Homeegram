@@ -47,8 +47,14 @@ class MyWalletPage extends StatelessWidget {
             label: "Gift Coin",
             onTap: () => context.pushGiftCoinPage(),
           ),
-          const WalletActionButton(label: "Wallet History"),
-          const WalletActionButton(label: "Refferal History"),
+          WalletActionButton(
+            label: "Wallet History",
+            onTap: () => context.pushWalletHistory(),
+          ),
+          WalletActionButton(
+            label: "Refferal History",
+            onTap: () => context.pushRefferalHistory(),
+          ),
         ],
       ),
     );

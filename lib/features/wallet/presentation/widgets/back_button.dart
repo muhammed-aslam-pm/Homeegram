@@ -14,7 +14,7 @@ class WalletBackButton extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(6), color: AppColors.grey1),
+            borderRadius: BorderRadius.circular(6), color: AppColors.grey3),
         padding: EdgeInsets.all(5),
         alignment: Alignment.center,
         margin: EdgeInsets.only(right: 10),

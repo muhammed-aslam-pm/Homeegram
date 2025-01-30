@@ -9,10 +9,12 @@ import 'package:homeegram/features/auth/presentation/pages/professionl_category_
 import 'package:homeegram/features/auth/presentation/pages/profile_information_page.dart';
 import 'package:homeegram/features/auth/presentation/pages/sign_up_page.dart';
 import 'package:homeegram/features/home/home_page.dart';
-import 'package:homeegram/features/wallet/presentation/pages/git_coins_page.dart';
+import 'package:homeegram/features/wallet/presentation/pages/gift_coins_page.dart';
 import 'package:homeegram/features/wallet/presentation/pages/my_wallet_page.dart';
+import 'package:homeegram/features/wallet/presentation/pages/refferal_history_page.dart';
 import 'package:homeegram/features/wallet/presentation/pages/success_screen.dart';
 import 'package:homeegram/features/wallet/presentation/pages/upgrade_wallet_page.dart';
+import 'package:homeegram/features/wallet/presentation/pages/wallet_history_page.dart';
 import 'package:homeegram/features/wallet/presentation/pages/wallet_page.dart';
 import 'package:homeegram/features/wallet/presentation/pages/wallet_verification_page.dart';
 
@@ -44,6 +46,8 @@ class AppRouter {
         '/gift_coin',
         '/wallet_verification',
         '/success_screen',
+        '/refferal_history',
+        '/wallet_history',
       ];
 
       // Handle unauthenticated users
@@ -138,6 +142,18 @@ class AppRouter {
         path: '/success_screen',
         name: 'success_screen',
         builder: (context, state) => const SuccessScreen(),
+      ),
+      // wallet verification Page
+      GoRoute(
+        path: '/refferal_history',
+        name: 'refferal_history',
+        builder: (context, state) => const RefferalHistoryPage(),
+      ),
+      // wallet verification Page
+      GoRoute(
+        path: '/wallet_history',
+        name: 'wallet_history',
+        builder: (context, state) => const WalletHistoryPage(),
       ),
       // Main App Shell with Bottom Navigation
       ShellRoute(
