@@ -33,6 +33,9 @@ extension NavigationExtensions on BuildContext {
     pushNamed('profile_information_form');
   }
 
+  void pushWalletPage() {
+    pushNamed('wallet');
+  }
   void pushMyWalletPage() {
     pushNamed('my_wallet');
   }

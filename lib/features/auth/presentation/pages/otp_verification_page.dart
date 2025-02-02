@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:homeegram/core/navigation/navigation_extensions.dart';
 import 'package:homeegram/core/shared/animations/transformAnimation.dart';
 import 'package:homeegram/core/config/theme/app_colors.dart';
+import 'package:homeegram/core/utils/validators.dart';
 import 'package:homeegram/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:homeegram/features/auth/presentation/widgets/login_back_page_layout.dart';
 import 'package:homeegram/features/auth/presentation/widgets/login_button.dart';
@@ -31,6 +32,7 @@ class OtpVerificationView extends StatelessWidget {
 
   OtpVerificationView({super.key, required this.phoneNumber});
   final TextEditingController _otpController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AuthBloc, AuthState>(
@@ -68,49 +70,53 @@ class OtpVerificationView extends StatelessWidget {
         bottom: screenHeight * 0.14,
       ),
       child: AnimatedWrapper(
-        child: Column(
-          children: [
-            _buildNumberSection(localization),
-            const Spacer(),
-            Pinput(
-              onCompleted: (pin) {
-                context.read<AuthBloc>().add(VerifyOtpEvent(pin));
-              },
-              controller: _otpController,
-              showCursor: true,
-              defaultPinTheme: PinTheme(
-                width: 54,
-                height: 54,
-                textStyle: const TextStyle(
-                  fontSize: 20,
-                  color: Color.fromRGBO(30, 60, 87, 1),
-                  fontWeight: FontWeight.w600,
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              _buildNumberSection(localization),
+              const Spacer(),
+              Pinput(
+                onCompleted: (pin) {
+                  context.read<AuthBloc>().add(VerifyOtpEvent(pin));
+                },
+                controller: _otpController,
+                showCursor: true,
+                validator: (value) => Validators.validateOTP(value),
+                defaultPinTheme: PinTheme(
+                  width: 54,
+                  height: 54,
+                  textStyle: const TextStyle(
+                    fontSize: 20,
+                    color: Color.fromRGBO(30, 60, 87, 1),
+                    fontWeight: FontWeight.w600,
+                  ),
+                  decoration: BoxDecoration(
+                    color: AppColors.grey2,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
                 ),
-                decoration: BoxDecoration(
-                  color: AppColors.grey2,
-                  borderRadius: BorderRadius.circular(15),
-                ),
+                enabled: state is! AuthLoading,
               ),
-              enabled: state is! AuthLoading,
-            ),
-            const Spacer(),
-            _buildDidntRecieve(localization!),
-            SizedBox(height: screenHeight * 0.035),
-            LoginButton(
-              text: localization.verifyAndProceedButton,
-              onPressed: state is AuthLoading
-                  ? null
-                  : () {
-                      if (_otpController.text.length == 6) {
-                        context
-                            .read<AuthBloc>()
-                            .add(VerifyOtpEvent(_otpController.text));
-                      }
-                    },
-              height: screenHeight * 0.065,
-              isLoading: state is AuthLoading,
-            ),
-          ],
+              const Spacer(),
+              _buildDidntRecieve(localization!),
+              SizedBox(height: screenHeight * 0.035),
+              LoginButton(
+                text: localization.verifyAndProceedButton,
+                onPressed: state is AuthLoading
+                    ? null
+                    : () {
+                        if (_formKey.currentState!.validate()) {
+                          context
+                              .read<AuthBloc>()
+                              .add(VerifyOtpEvent(_otpController.text));
+                        }
+                      },
+                height: screenHeight * 0.065,
+                isLoading: state is AuthLoading,
+              ),
+            ],
+          ),
         ),
       ),
     );

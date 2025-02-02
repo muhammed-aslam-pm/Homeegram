@@ -41,6 +41,7 @@ class AppRouter {
         '/intersets_selection',
         '/professional_category_choose',
         '/profile_information_form',
+        '/wallet',
         '/my_wallet',
         '/upgrade_wallet',
         '/gift_coin',
@@ -67,11 +68,11 @@ class AppRouter {
       return null; // No redirection
     },
     routes: [
-      // Login Page
+        // Login Page
       GoRoute(
         path: '/login',
         name: 'login',
-        builder: (context, state) => const WalletPage(),
+        builder: (context, state) => const LoginPage(),
       ),
       // OTP Verification Page
       GoRoute(
@@ -112,6 +113,12 @@ class AppRouter {
         path: '/profile_information_form',
         name: 'profile_information_form',
         builder: (context, state) => ProfileInformationFormPage(),
+      ),
+      // My Wallet Page
+      GoRoute(
+        path: '/wallet',
+        name: 'wallet',
+        builder: (context, state) => const WalletPage(),
       ),
       // My Wallet Page
       GoRoute(
@@ -172,9 +179,3 @@ class AppRouter {
     ],
   );
 }
-  // Login Page
-      // GoRoute(
-      //   path: '/login',
-      //   name: 'login',
-      //   builder: (context, state) => const LoginPage(),
-      // ),

@@ -6,6 +6,7 @@ import 'package:homeegram/core/navigation/navigation_extensions.dart';
 import 'package:homeegram/core/shared/animations/transformAnimation.dart';
 import 'package:homeegram/core/shared/widgets/app_logo_with_text.dart';
 import 'package:homeegram/core/config/theme/app_colors.dart';
+import 'package:homeegram/core/utils/validators.dart';
 import 'package:homeegram/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:homeegram/features/auth/presentation/widgets/login_back_page_layout.dart';
 import 'package:homeegram/features/auth/presentation/widgets/login_button.dart';
@@ -33,7 +34,7 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   final TextEditingController _phoneController = TextEditingController();
-
+  final _formKey = GlobalKey<FormState>();
   @override
   void dispose() {
     _phoneController.dispose();
@@ -74,44 +75,50 @@ class _LoginViewState extends State<LoginView> {
         vertical: screenHeight * 0.048,
       ),
       child: AnimatedWrapper(
-        child: Column(
-          children: [
-            AppLogoWithText(height: screenHeight * 0.07),
-            const Spacer(),
-            CustomTextFormField(
-              controller: _phoneController,
-              hintText: localization!.mobileHint,
-              prefixIcon: const SizedBox(
-                height: 30,
-                width: 30,
-                child: Center(
-                  child: Text("🇮🇳", style: TextStyle(fontSize: 20)),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              AppLogoWithText(height: screenHeight * 0.07),
+              const Spacer(),
+              CustomTextFormField(
+                controller: _phoneController,
+                hintText: localization!.mobileHint,
+                prefixIcon: const SizedBox(
+                  height: 30,
+                  width: 30,
+                  child: Center(
+                    child: Text("🇮🇳", style: TextStyle(fontSize: 20)),
+                  ),
                 ),
+                prefixText: "+91",
+                validator: (value) => Validators.validatePhoneNumber(value),
               ),
-              prefixText: "+91",
-            ),
-            SizedBox(height: screenHeight * 0.03),
-            LoginButton(
-              text: localization.getOtpButton,
-              onPressed: state is AuthLoading
-                  ? null
-                  : () {
-                      final phone = _phoneController.text.trim();
-                      if (phone.isNotEmpty) {
-                        context.read<AuthBloc>().add(SendOtpEvent(phone));
-                      }
-                    },
-              height: screenHeight * 0.06,
-              isLoading: state is AuthLoading,
-            ),
-            const SizedBox(height: 20),
-            const Spacer(),
-            _buildOrDivider(localization: localization),
-            const Spacer(),
-            _buildGoogleButton(localization: localization),
-            const Spacer(),
-            _buildTermsAndConditions(localization: localization),
-          ],
+              SizedBox(height: screenHeight * 0.03),
+              LoginButton(
+                text: localization.getOtpButton,
+                onPressed: state is AuthLoading
+                    ? null
+                    : () {
+                        if (_formKey.currentState!.validate()) {
+                          final phone = _phoneController.text.trim();
+                          if (phone.isNotEmpty) {
+                            context.read<AuthBloc>().add(SendOtpEvent(phone));
+                          }
+                        }
+                      },
+                height: screenHeight * 0.06,
+                isLoading: state is AuthLoading,
+              ),
+              const SizedBox(height: 20),
+              const Spacer(),
+              _buildOrDivider(localization: localization),
+              const Spacer(),
+              _buildGoogleButton(localization: localization),
+              const Spacer(),
+              _buildTermsAndConditions(localization: localization),
+            ],
+          ),
         ),
       ),
     );

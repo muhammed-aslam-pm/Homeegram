@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:homeegram/features/auth/data/models/generate_otp_prams.dart';
 import 'package:homeegram/features/auth/domain/usecases/generate_otp.dart';
+import 'package:homeegram/features/auth/domain/usecases/verify_otp.dart';
 import 'package:meta/meta.dart';
 
 part 'auth_event.dart';
@@ -10,14 +11,13 @@ part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final SendOtp generateOtp;
-
+  final VerifyOtp verifyOtp;
   // Add other use cases as needed
 
-  AuthBloc({
-    required this.generateOtp,
-  }) : super(AuthInitial()) {
+  AuthBloc({required this.generateOtp, required this.verifyOtp})
+      : super(AuthInitial()) {
     on<SendOtpEvent>(_onSendOtp);
-    // on<VerifyOtpEvent>(_onVerifyOtp);
+    on<VerifyOtpEvent>(_onVerifyOtp);
     // on<SignUpEvent>(_onSignUp);
     on<SelectCategoryEvent>(_onSelectCategory);
     on<SelectInterestsEvent>(_onSelectInterests);
@@ -39,18 +39,20 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-  // Future<void> _onVerifyOtp(VerifyOtpEvent event, Emitter<AuthState> emit) async {
-  //   emit(AuthLoading());
-  //   try {
-  //     final result = await login(LoginParams(otp: event.otp));
-  //     result.fold(
-  //       (failure) => emit(AuthError(failure.toString())),
-  //       (_) => emit(OtpVerified()),
-  //     );
-  //   } catch (e) {
-  //     emit(AuthError(e.toString()));
-  //   }
-  // }
+  Future<void> _onVerifyOtp(
+      VerifyOtpEvent event, Emitter<AuthState> emit) async {
+    try {
+      emit(AuthLoading());
+      // final result = await verifyOtp(event.otp);
+      // result.fold(
+      //   (failure) => emit(AuthFailure(error: failure.toString())),
+      //   (_) => emit(OtpVerified()),
+      // );
+      Future.delayed(Duration(seconds: 2)).then((_) => emit(OtpVerified()));
+    } catch (e) {
+      emit(AuthFailure(error: e.toString()));
+    }
+  }
 
   // Future<void> _onSignUp(SignUpEvent event, Emitter<AuthState> emit) async {
   //   emit(AuthLoading());

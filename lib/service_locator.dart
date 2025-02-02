@@ -38,7 +38,5 @@ void setupServiceLocator() {
   sl.registerSingleton<SignUp>(SignUp(repository: sl()));
 
   // BLoCs
-  sl.registerFactory(() => AuthBloc(
-        generateOtp: sl(),
-      ));
+  sl.registerFactory(() => AuthBloc(generateOtp: sl(), verifyOtp: sl()));
 }
