@@ -43,12 +43,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       VerifyOtpEvent event, Emitter<AuthState> emit) async {
     try {
       emit(AuthLoading());
-      // final result = await verifyOtp(event.otp);
-      // result.fold(
-      //   (failure) => emit(AuthFailure(error: failure.toString())),
-      //   (_) => emit(OtpVerified()),
-      // );
-      Future.delayed(Duration(seconds: 2)).then((_) => emit(OtpVerified()));
+      final result = await verifyOtp(event.otp, event.phoneNumber);
+      result.fold(
+        (failure) => emit(AuthFailure(error: failure.toString())),
+        (_) => emit(OtpVerified()),
+      );
+      // Future.delayed(Duration(seconds: 2)).then((_) => emit(OtpVerified()));
     } catch (e) {
       emit(AuthFailure(error: e.toString()));
     }

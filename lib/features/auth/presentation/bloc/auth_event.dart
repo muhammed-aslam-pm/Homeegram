@@ -10,7 +10,8 @@ class SendOtpEvent extends AuthEvent {
 
 class VerifyOtpEvent extends AuthEvent {
   final String otp;
-  VerifyOtpEvent(this.otp);
+  final String phoneNumber;
+  VerifyOtpEvent(this.otp, this.phoneNumber);
 }
 
 class SignUpEvent extends AuthEvent {

@@ -67,7 +67,7 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<Either<Failure, void>> verifyOtp(String otp) {
+  Future<Either<Failure, void>> verifyOtp(String otp, String phoneNumber) {
     // TODO: implement verifyOtp
     throw UnimplementedError();
   }

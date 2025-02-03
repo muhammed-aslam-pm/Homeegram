@@ -6,8 +6,6 @@ class GenerateOtpParams {
   });
 
   Map<String, dynamic> toMap() {
-    return {
-      'phoneNumber': phoneNumber,
-    };
+    return {'mobile_number': phoneNumber};
   }
 }

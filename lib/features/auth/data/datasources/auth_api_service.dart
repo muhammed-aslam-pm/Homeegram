@@ -7,7 +7,7 @@ import 'package:homeegram/core/constants/api_constants.dart';
 
 abstract class AuthApiService {
   Future<Either<Failure, void>> generateOtp(GenerateOtpParams params);
-  Future<Either> verifyOtp(String otp);
+  Future<Either> verifyOtp(String otp, String PhoneNumber);
 }
 
 class AuthApiServiceImpl extends AuthApiService {
@@ -28,11 +28,12 @@ class AuthApiServiceImpl extends AuthApiService {
   }
 
   @override
-  Future<Either> verifyOtp(String otp) async {
+  Future<Either> verifyOtp(String otp, String phoneNumber) async {
     try {
       final response = await apiClient.post(
         ApiUrls.verifyOtp,
         data: {
+          "mobile_number": phoneNumber,
           'otp': otp,
         },
       );

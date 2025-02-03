@@ -4,7 +4,7 @@ import 'package:homeegram/features/auth/data/models/generate_otp_prams.dart';
 
 abstract class AuthRepository {
   Future<Either<Failure, void>> sendOtp(GenerateOtpParams params);
-  Future<Either<Failure, void>> verifyOtp(String otp);
+  Future<Either<Failure, void>> verifyOtp(String otp, String phoneNumber);
   Future<Either<Failure, void>> siginUpWithProfileNameAndId(
       String profileName, String profileId);
   Future<Either<Failure, void>> chooseProfileCategory(String profileCategory);
