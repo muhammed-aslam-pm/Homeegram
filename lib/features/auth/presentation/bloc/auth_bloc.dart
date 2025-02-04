@@ -27,7 +27,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Future<void> _onSendOtp(SendOtpEvent event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
     try {
-      final params = GenerateOtpParams(phoneNumber: event.phoneNumber);
       final result = await generateOtp(event.phoneNumber);
       log(result.toString());
       result.fold(

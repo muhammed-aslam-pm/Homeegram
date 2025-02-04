@@ -14,8 +14,14 @@ class AuthRepositoryImpl extends AuthRepository {
   Future<Either<Failure, void>> sendOtp(GenerateOtpParams params) async {
     if (await networkInfo.isConnected) {
       try {
-        await apiService.generateOtp(params);
-        return Right(null);
+        final respones = await apiService.generateOtp(params);
+        return respones.fold(
+          (l) => respones,
+          (r) {
+            if (r.statusCode == 200) return respones;
+            return Left(Failure.server());
+          },
+        );
       } catch (e) {
         return Left(Failure.server());
       }
@@ -67,8 +73,23 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<Either<Failure, void>> verifyOtp(String otp, String phoneNumber) {
-    // TODO: implement verifyOtp
-    throw UnimplementedError();
+  Future<Either<Failure, void>> verifyOtp(
+      String otp, String phoneNumber) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final respones = await apiService.verifyOtp(otp, phoneNumber);
+        return respones.fold(
+          (l) => respones,
+          (r) {
+            if (r.statusCode == 200) return respones;
+            return Left(Failure.server());
+          },
+        );
+      } catch (e) {
+        return Left(Failure.server());
+      }
+    } else {
+      return Left(Failure.network());
+    }
   }
 }

@@ -47,7 +47,7 @@ class _LoginViewState extends State<LoginView> {
       listener: (context, state) {
         if (state is OtpSent) {
           context.pushOtpVerification(
-              phoneNumber: _phoneController.text.trim());
+              phoneNumber: "+91${_phoneController.text.trim()}");
         } else if (state is AuthFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(state.error)),
@@ -101,7 +101,7 @@ class _LoginViewState extends State<LoginView> {
                     ? null
                     : () {
                         if (_formKey.currentState!.validate()) {
-                          final phone = _phoneController.text.trim();
+                          final phone = "+91${_phoneController.text.trim()}";
                           if (phone.isNotEmpty) {
                             context.read<AuthBloc>().add(SendOtpEvent(phone));
                           }

@@ -28,9 +28,9 @@ class Validators {
     if (value == null || value.isEmpty) {
       return 'OTP is required';
     }
-    final otpRegex = RegExp(r'^\d{4}$');
+    final otpRegex = RegExp(r'^\d{6}$');
     if (!otpRegex.hasMatch(value)) {
-      return 'Enter a valid 4-digit OTP';
+      return 'Enter a valid 6-digit OTP';
     }
     return null;
   }

@@ -80,11 +80,12 @@ class OtpVerificationView extends StatelessWidget {
                 onCompleted: (pin) {
                   context
                       .read<AuthBloc>()
-                      .add(VerifyOtpEvent(pin, phoneNumber));
+                      .add(VerifyOtpEvent(pin, phoneNumber.trim()));
                 },
                 controller: _otpController,
                 showCursor: true,
                 validator: (value) => Validators.validateOTP(value),
+                length: 6,
                 defaultPinTheme: PinTheme(
                   width: 54,
                   height: 54,
@@ -109,8 +110,8 @@ class OtpVerificationView extends StatelessWidget {
                     ? null
                     : () {
                         if (_formKey.currentState!.validate()) {
-                          context.read<AuthBloc>().add(
-                              VerifyOtpEvent(_otpController.text, phoneNumber));
+                          context.read<AuthBloc>().add(VerifyOtpEvent(
+                              _otpController.text, phoneNumber.trim()));
                         }
                       },
                 height: screenHeight * 0.065,
